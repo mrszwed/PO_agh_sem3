@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agh.ics.oop.Vector2dTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-20T20:28:03" hostname="DESKTOP-DFQL1UA" time="0.027">
-  <properties/>
-  <testcase name="opposite()" classname="agh.ics.oop.Vector2dTest" time="0.027"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
