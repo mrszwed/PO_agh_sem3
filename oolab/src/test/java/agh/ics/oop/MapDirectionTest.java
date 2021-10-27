@@ -28,5 +28,15 @@ class MapDirectionTest {
             if(i%4==3)assertTrue(kierunek==MapDirection.WEST);
             kierunek=kierunek.previous();
         }
+
+        var kierunek1=MapDirection.SOUTH.previous();
+        assertTrue(kierunek1==MapDirection.EAST);
+        kierunek1=kierunek1.previous();
+        assertTrue(kierunek1==MapDirection.NORTH);
+        kierunek1=kierunek1.previous();
+        assertTrue(kierunek1==MapDirection.WEST);
+        kierunek1=kierunek1.previous();
+        assertTrue(kierunek1==MapDirection.SOUTH);
+
     }
 }

@@ -43,6 +43,10 @@ public class Vector2d {
         return new Vector2d(x-other.x, y-other.y);
     }
 
+    public int hashCode(){
+        return Integer.hashCode(x)+7727*Integer.hashCode(y);
+    }
+
     public boolean equals(Object other){
         if(this==other)return true;
         if (!(other instanceof Vector2d))return false;
