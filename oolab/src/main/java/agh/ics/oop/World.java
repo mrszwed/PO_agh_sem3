@@ -110,6 +110,7 @@ public class World {
     *       }
     *       pol.x=x;
     *       pol.y=y;
+    *       zwierzeta.add(this);
     *   }
     * }
     *
