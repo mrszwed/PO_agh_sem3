@@ -69,6 +69,27 @@ public class World {
         System.out.println(position1.add(position2));
     }
 //===================================================================   LAB3
+    /* odp na pytanie:
+     *
+     * utworzyć zbiór zwierząt (set) i po utworzeniu dodawac zwierzeta do zbioru
+     * sprawdzać jeżeli zwierzę o takim położeniu istnieje to albo wylosować inną wartość, albo wyrzucić wyjątek
+     *
+     * class Animal{
+     *   static set<Animal> zwierzeta=new HashSet<>();
+     *   Animal(int x, int y){
+     *       for(Animal a:zwierzeta){
+     *           if(a.pol.x==x && a.pol.y==y)throw new OccupiedLocationException();
+     *       }
+     *       pol.x=x;
+     *       pol.y=y;
+     *       zwierzeta.add(this);
+     *   }
+     * }
+     *
+     * */
+
+
+
     static void zadanie33(){
         Animal zwierze=new Animal();
         System.out.println(zwierze.toString());
@@ -97,29 +118,19 @@ public class World {
         }
     }
 
-    /* odp na pytanie:
-    *
-    * utworzyć zbiór zwierząt (set) i po utworzeniu dodawac zwierzeta do zbioru
-    * sprawdzać jeżeli zwierzę o takim położeniu istnieje to albo wylosować inną wartość, albo wyrzucić wyjątek
-    *
-    * class Animal{
-    *   static set<Animal> zwierzeta=new HashSet<>();
-    *   Animal(int x, int y){
-    *       for(Animal a:zwierzeta){
-    *           if(a.pol.x==x && a.pol.y==y)throw new OccupiedLocationException();
-    *       }
-    *       pol.x=x;
-    *       pol.y=y;
-    *       zwierzeta.add(this);
-    *   }
-    * }
-    *
-    * */
+    static void zadanie46(){
+        String polecenia="f b r l f f r r f f f f f f f f";
+        String[] args=polecenia.split(" ");
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+    }
+
 
     public static void main(String[] args){
-        //zadanie33();
-//        zadanie35();
-        zadanie37();
+        zadanie46();
     }
 
 }

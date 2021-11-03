@@ -54,22 +54,28 @@ class Lab3Test {
 
     @Test
     void testMapBorder(){
-        Animal zwierze=new Animal();
-        zwierze.move(MoveDirection.FORWARD);
-        for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(2,4));
-        zwierze.move(MoveDirection.RIGHT);
-        for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(4,4));
-        zwierze.move(MoveDirection.RIGHT);
-        for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(4,0));
-        zwierze.move(MoveDirection.RIGHT);
-        for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(0,0));
-        zwierze.move(MoveDirection.RIGHT);
-        for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(0,4));
+        try {
+            Animal zwierze=new Animal();
+            zwierze.move(MoveDirection.FORWARD);
+            for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
+            assertEquals(zwierze.getPol(), new Vector2d(2,4));
+            zwierze.move(MoveDirection.RIGHT);
+            for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
+            assertEquals(zwierze.getPol(), new Vector2d(4,4));
+            zwierze.move(MoveDirection.RIGHT);
+            for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
+            assertEquals(zwierze.getPol(), new Vector2d(4,0));
+            zwierze.move(MoveDirection.RIGHT);
+            for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
+            assertEquals(zwierze.getPol(), new Vector2d(0,0));
+            zwierze.move(MoveDirection.RIGHT);
+            for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
+            assertEquals(zwierze.getPol(), new Vector2d(0,4));
+        }
+        catch(Exception e){
+            return;
+        }
+        fail("powinien byc wyjatek");
     }
 
 }

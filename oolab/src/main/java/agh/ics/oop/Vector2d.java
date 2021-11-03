@@ -57,4 +57,5 @@ public class Vector2d {
     Vector2d opposite(){
        return new Vector2d(-x,-y);
     }
+
 }

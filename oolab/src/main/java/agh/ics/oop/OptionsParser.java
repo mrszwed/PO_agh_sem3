@@ -8,8 +8,8 @@ import java.util.Map;
 public class OptionsParser {
 
     static Map<String,MoveDirection> slownik=new HashMap<>(); //pole statyczne dzielone przez wszystkie obiekty danej klasy
-    static{                                                   //inicjalizacja pol statycznych wykonywana jest jednokrotnie
-        slownik.put("f",MoveDirection.FORWARD);               //przy tworzeniu pierwszego obiektu, lub uzyciu metody/atrybutu statycznego
+    static{                                                   //inicjalizacja pol statycznych wykonywana jest jednokrotnie przy tworzeniu pierwszego obiektu, lub uzyciu metody/atrybutu statycznego
+        slownik.put("f",MoveDirection.FORWARD);
         slownik.put("forward",MoveDirection.FORWARD);
         slownik.put("b",MoveDirection.BACKWARD);
         slownik.put("backward",MoveDirection.BACKWARD);
