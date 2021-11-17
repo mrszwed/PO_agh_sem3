@@ -1,7 +1,5 @@
 package agh.ics.oop;
 
-import java.net.SocketOption;
-
 public class World {
     public static void mainlab1(String[] args) {
         System.out.println("system wystartowal");
@@ -59,8 +57,6 @@ public class World {
         System.out.println("stop");
     }
 
-//==================================================================    LAB2
-
     public static void main3(String[] args){
         Vector2d position1 = new Vector2d(1,2);
         System.out.println(position1);
@@ -68,27 +64,6 @@ public class World {
         System.out.println(position2);
         System.out.println(position1.add(position2));
     }
-//===================================================================   LAB3
-    /* odp na pytanie:
-     *
-     * utworzyć zbiór zwierząt (set) i po utworzeniu dodawac zwierzeta do zbioru
-     * sprawdzać jeżeli zwierzę o takim położeniu istnieje to albo wylosować inną wartość, albo wyrzucić wyjątek
-     *
-     * class Animal{
-     *   static set<Animal> zwierzeta=new HashSet<>();
-     *   Animal(int x, int y){
-     *       for(Animal a:zwierzeta){
-     *           if(a.pol.x==x && a.pol.y==y)throw new OccupiedLocationException();
-     *       }
-     *       pol.x=x;
-     *       pol.y=y;
-     *       zwierzeta.add(this);
-     *   }
-     * }
-     *
-     * */
-
-
 
     static void zadanie33(){
         Animal zwierze=new Animal();
@@ -127,10 +102,19 @@ public class World {
         IEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
     }
-
+    static void main61(){
+        String polecenia="f b r l f f r r f f f f f f f f";
+        String[] args=polecenia.split(" ");
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        GrassField map=new GrassField(10);
+        map.toString();
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+    }
 
     public static void main(String[] args){
-        zadanie46();
+        main61();
     }
 
 }

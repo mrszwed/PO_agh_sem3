@@ -2,8 +2,6 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class Lab3Test {
@@ -26,12 +24,12 @@ class Lab3Test {
         Animal zwierze=new Animal();
         zwierze.move(MoveDirection.RIGHT);
         zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(3,2));
+        assertEquals(zwierze.getPosition(), new Vector2d(3,2));
         zwierze.move(MoveDirection.RIGHT);
         zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(3,1));
+        assertEquals(zwierze.getPosition(), new Vector2d(3,1));
         zwierze.move(MoveDirection.FORWARD);
-        assertEquals(zwierze.getPol(), new Vector2d(3,0));
+        assertEquals(zwierze.getPosition(), new Vector2d(3,0));
 
         Animal zwierze1=new Animal();
         String polecenia1="b b l b";
@@ -40,7 +38,7 @@ class Lab3Test {
         for(var i:tabkierunki1){
             zwierze1.move(i);
         }
-        assertEquals(zwierze1.getPol(), new Vector2d(3,0));
+        assertEquals(zwierze1.getPosition(), new Vector2d(3,0));
 
         Animal zwierze2=new Animal();
         String polecenia2="l f f l b";
@@ -49,7 +47,7 @@ class Lab3Test {
         for(var i:tabkierunki2){
             zwierze2.move(i);
         }
-        assertEquals(zwierze2.getPol(), new Vector2d(0,3));
+        assertEquals(zwierze2.getPosition(), new Vector2d(0,3));
     }
 
     @Test
@@ -58,19 +56,19 @@ class Lab3Test {
             Animal zwierze=new Animal();
             zwierze.move(MoveDirection.FORWARD);
             for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-            assertEquals(zwierze.getPol(), new Vector2d(2,4));
+            assertEquals(zwierze.getPosition(), new Vector2d(2,4));
             zwierze.move(MoveDirection.RIGHT);
             for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-            assertEquals(zwierze.getPol(), new Vector2d(4,4));
+            assertEquals(zwierze.getPosition(), new Vector2d(4,4));
             zwierze.move(MoveDirection.RIGHT);
             for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-            assertEquals(zwierze.getPol(), new Vector2d(4,0));
+            assertEquals(zwierze.getPosition(), new Vector2d(4,0));
             zwierze.move(MoveDirection.RIGHT);
             for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-            assertEquals(zwierze.getPol(), new Vector2d(0,0));
+            assertEquals(zwierze.getPosition(), new Vector2d(0,0));
             zwierze.move(MoveDirection.RIGHT);
             for(int i=0; i<10; i++)zwierze.move(MoveDirection.FORWARD);
-            assertEquals(zwierze.getPol(), new Vector2d(0,4));
+            assertEquals(zwierze.getPosition(), new Vector2d(0,4));
         }
         catch(Exception e){
             return;

@@ -1,34 +1,35 @@
 package agh.ics.oop;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SimulationEngine implements IEngine{
-        MoveDirection[] tabMove;
-        IWorldMap map;
-        Vector2d[] vectPos;
+        private MoveDirection[] tabMove;
+        private IWorldMap map;
+
+        private List<Animal> zwierzeta=new ArrayList<>();
 
     SimulationEngine(MoveDirection[] tabMove, IWorldMap map, Vector2d[] vectPos){
         this.tabMove=tabMove;
         this.map=map;
-        this.vectPos=vectPos;
         for(var i:vectPos){
             Animal zwierze=new Animal(map, i);
-            map.place(zwierze);
+            if(map.place(zwierze))zwierzeta.add(zwierze);
         }
     }
 
 
     @Override
     public void run() {
-        RectangularMap rMap;
-        if(map instanceof RectangularMap)rMap=(RectangularMap)map;
-        else throw new RuntimeException("mapa nie zapewnia dostępu do zwierząt");
+//        RectangularMap rMap;
+//        if(map instanceof RectangularMap)rMap=(RectangularMap)map;
+//        else throw new RuntimeException("mapa nie zapewnia dostępu do zwierząt");
         for(int i=0; i<tabMove.length; i++){
-            if(i%rMap.zwierzeta.size()==0){
+            if(i%zwierzeta.size()==0){
                 System.out.println(map.toString());
             }
-            int zwierzeIdx=i%rMap.zwierzeta.size();
-            rMap.zwierzeta.get(zwierzeIdx).move(tabMove[i]);
+            int zwierzeIdx=i%zwierzeta.size();
+            zwierzeta.get(zwierzeIdx).move(tabMove[i]);
         }
         System.out.println(map.toString());
     }

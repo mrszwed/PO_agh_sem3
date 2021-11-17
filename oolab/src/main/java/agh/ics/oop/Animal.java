@@ -2,13 +2,8 @@ package agh.ics.oop;
 
 public class Animal {
     private MapDirection mapDir=MapDirection.NORTH;
-    private Vector2d pol=new Vector2d(2,2);
+    private Vector2d position =new Vector2d(2,2);
     private IWorldMap map;
-//    public Animal(){
-//        mapDir=MapDirection.NORTH;
-//        moveDir=MoveDirection.FORWARD;
-//        pol=new Vector2d(2,2);
-//    }
 
     Animal(){}
 
@@ -18,7 +13,7 @@ public class Animal {
 
     Animal(IWorldMap map, Vector2d initialPosition){
         this.map=map;
-        pol=initialPosition;
+        position =initialPosition;
     }
 
     public String toStringOld(){
@@ -26,9 +21,9 @@ public class Animal {
         s.append("kierunek: ");
         s.append(mapDir.toString());
         s.append(", położenie: (");
-        s.append(pol.x);
+        s.append(position.x);
         s.append(",");
-        s.append(pol.y);
+        s.append(position.y);
         s.append(")");
         return s.toString();
     }
@@ -45,44 +40,32 @@ public class Animal {
     }
 
     boolean isAt(Vector2d position){
-        return pol.equals(position);
+        return this.position.equals(position);
     }
 
-    /*public boolean czyWyjedzie(MoveDirection direction){
-        switch(direction){
-            case FORWARD -> {
-                if(mapDir==MapDirection.NORTH && pol.y==4)return true;
-                if(mapDir==MapDirection.SOUTH && pol.y==0)return true;
-                if(mapDir==MapDirection.EAST && pol.x==4)return true;
-                if(mapDir==MapDirection.WEST && pol.x==0)return true;
-            }
-            case BACKWARD -> {
-                if(mapDir==MapDirection.NORTH && pol.y==0)return true;
-                if(mapDir==MapDirection.SOUTH && pol.y==4)return true;
-                if(mapDir==MapDirection.EAST && pol.x==0)return true;
-                if(mapDir==MapDirection.WEST && pol.x==4)return true;
-            }
-        }
-        return false;
-    }*/
-
     Vector2d calculateNewPosition(MoveDirection direction){
-        if(direction==MoveDirection.FORWARD)return pol.add(mapDir.toUnitVector());
-        if(direction==MoveDirection.BACKWARD)return pol.subtract(mapDir.toUnitVector());
-        return pol;
+        if(direction==MoveDirection.FORWARD)return position.add(mapDir.toUnitVector());
+        if(direction==MoveDirection.BACKWARD)return position.subtract(mapDir.toUnitVector());
+        return position;
     }
 
     public void move(MoveDirection direction){
-        if(pol==null || map==null){
+        if(position ==null || map==null){
             throw new RuntimeException("zwierzę bez mapy i położenia");
         }
         Vector2d newPosition=calculateNewPosition(direction);
-        if(!pol.equals(newPosition) && !map.canMoveTo(newPosition))return;
+        if(!position.equals(newPosition) && !map.canMoveTo(newPosition))return;
         switch(direction){
             case RIGHT -> mapDir=mapDir.next();
             case LEFT -> mapDir=mapDir.previous();
-            case FORWARD -> pol=newPosition;
-            case BACKWARD -> pol=newPosition;
+            case FORWARD -> {
+                position = newPosition;
+                map.onPositionChanged(position);
+            }
+            case BACKWARD -> {
+                position =newPosition;
+                map.onPositionChanged(position);
+            }
         }
 
         System.out.println(mapDir.toString());
@@ -92,7 +75,7 @@ public class Animal {
         return mapDir;
     }
 
-    public Vector2d getPol() {
-        return pol;
+    public Vector2d getPosition() {
+        return position;
     }
 }
