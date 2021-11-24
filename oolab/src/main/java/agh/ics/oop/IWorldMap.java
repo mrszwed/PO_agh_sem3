@@ -46,9 +46,4 @@ public interface IWorldMap {
      */
     Object objectAt(Vector2d position);
 
-    /**
-     *wołane przez zwierzę w momencie zmiany pozycji
-     * */
-
-    default void onPositionChanged(Vector2d nPos){}
 }

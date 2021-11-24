@@ -9,5 +9,4 @@ public class RectangularMap extends AbstractWorldMap{
         super(width, height);
     }
 
-
 }

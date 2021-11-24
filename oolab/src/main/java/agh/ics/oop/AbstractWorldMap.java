@@ -1,11 +1,11 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
-abstract public class AbstractWorldMap implements IWorldMap{
+abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
 
-    private List<Animal> zwierzeta=new ArrayList<>();
+    HashMap<Vector2d,Animal> zwierzeta = new HashMap<>();
+
     protected int width;
     protected int height;
     AbstractWorldMap(int width, int height){
@@ -21,14 +21,13 @@ abstract public class AbstractWorldMap implements IWorldMap{
         return true;
     }
 
-
-
     @Override
     public boolean place(Animal animal){
         if(!canMoveTo(animal.getPosition()))return false;
-        zwierzeta.add(animal);
+        zwierzeta.put(animal.getPosition(), animal);
         return true;
     }
+
 
     @Override
     public boolean isOccupied(Vector2d position){
@@ -38,24 +37,12 @@ abstract public class AbstractWorldMap implements IWorldMap{
 
     @Override
     public Object objectAt(Vector2d position){
-        for (Animal a : zwierzeta) {
-            if (a.getPosition().equals(position)) return a;
-        }
-        return null;
+        return zwierzeta.get(position);
     }
 
     private boolean isOccupiedByAnimal(Vector2d position) {
-        for (Animal a : zwierzeta) {
-            if (a.getPosition().equals(position)) return true;
-        }
+        if (zwierzeta.get(position)!=null) return true;
         return false;
-    }
-
-    Object animalAt(Vector2d position){
-        for (Animal a : zwierzeta) {
-            if (a.getPosition().equals(position)) return a;
-        }
-        return null;
     }
 
     public String toString(){
@@ -63,4 +50,10 @@ abstract public class AbstractWorldMap implements IWorldMap{
         return visualizer.draw(new Vector2d(0,0), new Vector2d(width-1, height-1));
     }
 
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        zwierzeta.put(newPosition, zwierzeta.get(oldPosition));
+        System.out.println(oldPosition+"->"+newPosition);
+        zwierzeta.remove(oldPosition);
+    }
 }

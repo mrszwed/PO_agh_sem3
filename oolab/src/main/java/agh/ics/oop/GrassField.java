@@ -40,10 +40,10 @@ public class GrassField extends AbstractWorldMap{
     }
 
     @Override
-    public void onPositionChanged(Vector2d nPos){
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+        super.positionChanged(oldPosition, newPosition);
         for(int i=0; i<grassClamps.size(); i++){
-            if(nPos.equals(grassClamps.get(i).getPosition()))grassClamps.remove(i);
+            if(newPosition.equals(grassClamps.get(i).getPosition()))grassClamps.remove(i);
         }
     }
-
 }
