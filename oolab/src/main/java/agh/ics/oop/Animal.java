@@ -5,7 +5,7 @@ public class Animal {
     private Vector2d position =new Vector2d(2,2);
     private IWorldMap map;
 
-    Animal(){}
+    Animal(){}// ten konstruktor nie ma prawa bytu
 
     Animal(IWorldMap map){
         this.map=map;
@@ -31,7 +31,7 @@ public class Animal {
     public String toString(){
         StringBuilder s=new StringBuilder();
         switch(this.mapDir){
-            case NORTH -> s.append("^");
+            case NORTH -> s.append("^");    // czemu nie zwykły return?
             case EAST -> s.append(">");
             case SOUTH -> s.append("v");
             case WEST -> s.append("<");
@@ -43,7 +43,7 @@ public class Animal {
         return this.position.equals(position);
     }
 
-    Vector2d calculateNewPosition(MoveDirection direction){
+    Vector2d calculateNewPosition(MoveDirection direction){ // private
         if(direction==MoveDirection.FORWARD)return position.add(mapDir.toUnitVector());
         if(direction==MoveDirection.BACKWARD)return position.subtract(mapDir.toUnitVector());
         return position;
@@ -51,7 +51,7 @@ public class Animal {
 
     public void move(MoveDirection direction){
         if(position ==null || map==null){
-            throw new RuntimeException("zwierzę bez mapy i położenia");
+            throw new RuntimeException("zwierzę bez mapy i położenia"); // trochę późno się zorientowało
         }
         Vector2d newPosition=calculateNewPosition(direction);
         if(!position.equals(newPosition) && !map.canMoveTo(newPosition))return;

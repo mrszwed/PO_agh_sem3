@@ -3,13 +3,13 @@ package agh.ics.oop;
 import java.util.*;
 
 public class GrassField extends AbstractWorldMap{
-    List<Grass> grassClamps=new ArrayList<>();
-    GrassField(int n){
+    List<Grass> grassClamps=new ArrayList<>();  // private
+    GrassField(int n){  // public
         super((int)Math.sqrt(n*10), (int)Math.sqrt(n*10));
         placeGrass(n);
     }
 
-    boolean placeGrass(int n) {
+    boolean placeGrass(int n) { // private
         Random rand=new Random();
         int placed=0;
         Set<Vector2d> occupied = new HashSet<>();
