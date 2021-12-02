@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Animal {
     private MapDirection mapDir=MapDirection.NORTH;
-    private Vector2d position =new Vector2d(2,2);
+    private Vector2d position;
     private IWorldMap map;
-    List<IPositionChangeObserver> observers = new ArrayList<>();
+    private List<IPositionChangeObserver> observers = new ArrayList<>();
 
-    Animal(){}
+//    Animal(){}
 
-    Animal(IWorldMap map){
-        this.map=map;
+    public Animal(IWorldMap map){
+        this(map, new Vector2d(2,2));
     }
 
-    Animal(IWorldMap map, Vector2d initialPosition){
+    public Animal(IWorldMap map, Vector2d initialPosition){
         this.map=map;
         position =initialPosition;
     }
@@ -85,15 +85,15 @@ public class Animal {
         return position;
     }
 
-    void addObserver(IPositionChangeObserver observer){
+    public void addObserver(IPositionChangeObserver observer){
         observers.add(observer);
     }
 
-    void removeObserver(IPositionChangeObserver observer){
+    public void removeObserver(IPositionChangeObserver observer){
         observers.remove(observer);
     }
 
-    void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+    private void positionChanged(Vector2d oldPosition, Vector2d newPosition){
         for(var i: observers){
             i.positionChanged(oldPosition,newPosition);
         }

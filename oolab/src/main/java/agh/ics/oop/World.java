@@ -1,5 +1,7 @@
 package agh.ics.oop;
 
+import java.util.Arrays;
+
 public class World {
     public static void mainlab1(String[] args) {
         System.out.println("system wystartowal");
@@ -57,7 +59,7 @@ public class World {
         System.out.println("stop");
     }
 
-    public static void main3(String[] args){
+    /*public static void main3(String[] args){
         Vector2d position1 = new Vector2d(1,2);
         System.out.println(position1);
         Vector2d position2 = new Vector2d(-2,1);
@@ -101,7 +103,7 @@ public class World {
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         IEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
-    }
+    }*/
     static void main61(){
         String polecenia="f b r l f f r r f f f f f f f f";
         String[] args=polecenia.split(" ");
@@ -109,8 +111,23 @@ public class World {
         Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
         GrassField map=new GrassField(10);
         map.toString();
-        IEngine engine = new SimulationEngine(directions, map, positions, map);
+        IEngine engine = new SimulationEngine(directions, map, positions, Arrays.asList(map, map.boundary));
         engine.run();
+    }
+
+    static void mainZWyjatkami(){
+        try {
+            String polecenia = "f b r l f up r r f f f f f f f f";
+            String[] args = polecenia.split(" ");
+            MoveDirection[] directions = new OptionsParser().parse(args);
+            Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4), new Vector2d(2,2)};
+            GrassField map = new GrassField(10);
+            map.toString();
+            IEngine engine = new SimulationEngine(directions, map, positions, Arrays.asList(map,map.boundary));
+            engine.run();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args){

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
 
-    HashMap<Vector2d,Animal> zwierzeta = new HashMap<>();
+    protected HashMap<Vector2d,Animal> animals = new HashMap<>();
 
     protected int width;
     protected int height;
@@ -21,13 +21,18 @@ abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         return true;
     }
 
-    @Override
-    public boolean place(Animal animal){
+//    @Override
+    public boolean placeOld(Animal animal){
         if(!canMoveTo(animal.getPosition()))return false;
-        zwierzeta.put(animal.getPosition(), animal);
+        animals.put(animal.getPosition(), animal);
         return true;
     }
 
+    public boolean place(Animal animal){
+        if(!canMoveTo(animal.getPosition()))throw new IllegalArgumentException("błędne pole" + animal.getPosition());
+        animals.put(animal.getPosition(), animal);
+        return true;
+    }
 
     @Override
     public boolean isOccupied(Vector2d position){
@@ -37,11 +42,11 @@ abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObse
 
     @Override
     public Object objectAt(Vector2d position){
-        return zwierzeta.get(position);
+        return animals.get(position);
     }
 
-    private boolean isOccupiedByAnimal(Vector2d position) {
-        if (zwierzeta.get(position)!=null) return true;
+    protected boolean isOccupiedByAnimal(Vector2d position) {
+        if (animals.get(position)!=null) return true;
         return false;
     }
 
@@ -52,8 +57,8 @@ abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObse
 
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
-        zwierzeta.put(newPosition, zwierzeta.get(oldPosition));
-        System.out.println(oldPosition+"->"+newPosition);
-        zwierzeta.remove(oldPosition);
+        animals.put(newPosition, animals.get(oldPosition));
+        animals.remove(oldPosition);
+
     }
 }

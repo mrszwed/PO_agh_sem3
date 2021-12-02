@@ -9,13 +9,17 @@ public class SimulationEngine implements IEngine{
 
         private List<Animal> zwierzeta=new ArrayList<>();
 
-    SimulationEngine(MoveDirection[] tabMove, IWorldMap map,  Vector2d[] vectPos, IPositionChangeObserver observer){
+    SimulationEngine(MoveDirection[] tabMove, IWorldMap map,  Vector2d[] vectPos, List<IPositionChangeObserver> observers){
         this.tabMove=tabMove;
         this.map=map;
         for(var i:vectPos){
             Animal zwierze=new Animal(map, i);
-            if(observer!=null)zwierze.addObserver(observer);
-            if(map.place(zwierze))zwierzeta.add(zwierze);
+
+            if(map.place(zwierze)){
+                zwierzeta.add(zwierze);
+                for(var o:observers)zwierze.addObserver(o);
+
+            }
         }
     }
 

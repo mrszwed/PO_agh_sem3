@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class OptionsParser {
 
-    static Map<String,MoveDirection> slownik=new HashMap<>(); //pole statyczne dzielone przez wszystkie obiekty danej klasy
-    static{                                                   //inicjalizacja pol statycznych wykonywana jest jednokrotnie przy tworzeniu pierwszego obiektu, lub uzyciu metody/atrybutu statycznego
+    static Map<String,MoveDirection> slownik=new HashMap<>();
+    static{
         slownik.put("f",MoveDirection.FORWARD);
         slownik.put("forward",MoveDirection.FORWARD);
         slownik.put("b",MoveDirection.BACKWARD);
@@ -23,7 +23,9 @@ public class OptionsParser {
         List<MoveDirection> listakierunkow=new ArrayList<>();
         for(String s:tabs){
             var kierunek=slownik.get(s);
-            if(kierunek==null)continue;
+            if(kierunek==null){
+                throw new IllegalArgumentException(s+" is not legal move specification");
+            }
             listakierunkow.add(kierunek);
         }
         MoveDirection[] kierunki=new MoveDirection[listakierunkow.size()];

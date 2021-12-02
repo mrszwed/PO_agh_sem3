@@ -4,6 +4,7 @@ import java.util.*;
 
 public class GrassField extends AbstractWorldMap{
     List<Grass> grassClamps=new ArrayList<>();
+    MapBoundary boundary=new MapBoundary();
     GrassField(int n){
         super((int)Math.sqrt(n*10), (int)Math.sqrt(n*10));
         placeGrass(n);
@@ -22,10 +23,18 @@ public class GrassField extends AbstractWorldMap{
                     occupied.add(pos);
                     Grass g = new Grass(pos);
                     grassClamps.add(g);
+                    boundary.positionChanged(null, pos);
                 }
             }
             while (freeSpace==false);
         }
+        return true;
+    }
+
+    @Override
+    public boolean place(Animal animal){
+        if(!super.place(animal))return false;
+        boundary.positionChanged(null,animal.getPosition());
         return true;
     }
 
@@ -39,11 +48,29 @@ public class GrassField extends AbstractWorldMap{
         return null;
     }
 
+    /**
+     * przedefiniowane canMoveTo, width i height nie jest sprawdzane przy ruchu zwierząt
+     * @param position
+     * @return
+     */
+    @Override
+    public boolean canMoveTo(Vector2d position) {
+        if(isOccupiedByAnimal(position))return false;
+        return true;
+    }
+
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         super.positionChanged(oldPosition, newPosition);
         for(int i=0; i<grassClamps.size(); i++){
             if(newPosition.equals(grassClamps.get(i).getPosition()))grassClamps.remove(i);
         }
+    }
+@Override
+    public String toString(){
+        MapVisualizer visualizer=new MapVisualizer(this);
+        if(boundary.x.size()<1)return "mapa jest pusta";
+        int last=boundary.x.size()-1;
+        return visualizer.draw(new Vector2d(boundary.x.get(0).x,boundary.y.get(0).y), new Vector2d(boundary.x.get(last).x, boundary.x.get(last).y));
     }
 }
