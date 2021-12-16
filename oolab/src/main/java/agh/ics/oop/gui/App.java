@@ -90,7 +90,7 @@ public class App extends Application implements ISimulationObserver {
         Scene scene = new Scene(root, 900, 900);
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("test javafxa");
+        primaryStage.setTitle("test javafx");
         primaryStage.show();
     }
 
