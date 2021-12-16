@@ -50,6 +50,7 @@ public class Animal {
     Vector2d calculateNewPosition(MoveDirection direction){
         if(direction==MoveDirection.FORWARD)return position.add(mapDir.toUnitVector());
         if(direction==MoveDirection.BACKWARD)return position.subtract(mapDir.toUnitVector());
+//        if(direction==MoveDirection.BACKWARD)return position.add(mapDir.toUnitVector());
         return position;
     }
 
@@ -70,6 +71,7 @@ public class Animal {
             case BACKWARD -> {
                 Vector2d oldPosition=position;
                 position =newPosition;
+                mapDir=mapDir.next().next();
                 positionChanged(oldPosition, position);
             }
         }

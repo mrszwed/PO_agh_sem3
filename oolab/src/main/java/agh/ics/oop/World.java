@@ -1,5 +1,8 @@
 package agh.ics.oop;
 
+//import agh.ics.oop.gui.App;
+import agh.ics.oop.gui.App;
+
 import java.util.Arrays;
 
 public class World {
@@ -107,12 +110,15 @@ public class World {
     static void main61(){
         String polecenia="f b r l f f r r f f f f f f f f";
         String[] args=polecenia.split(" ");
-        MoveDirection[] directions = new OptionsParser().parse(args);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        GrassField map=new GrassField(10);
-        map.toString();
-        IEngine engine = new SimulationEngine(directions, map, positions, Arrays.asList(map, map.boundary));
-        engine.run();
+//        MoveDirection[] directions = new OptionsParser().parse(args);
+//        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+//        GrassField map=new GrassField(10);
+//        map.toString();
+//        IEngine engine = new SimulationEngine(directions, map, positions, Arrays.asList(map, map.getBoundary()));
+//        engine.run();
+//        App app=new App();
+
+        App.init(args);
     }
 
     static void mainZWyjatkami(){
@@ -123,7 +129,7 @@ public class World {
             Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4), new Vector2d(2,2)};
             GrassField map = new GrassField(10);
             map.toString();
-            IEngine engine = new SimulationEngine(directions, map, positions, Arrays.asList(map,map.boundary));
+            IEngine engine = new SimulationEngine(directions, map, positions, Arrays.asList(map, map.getBoundary()));
             engine.run();
         } catch (IllegalArgumentException e) {
             e.printStackTrace();

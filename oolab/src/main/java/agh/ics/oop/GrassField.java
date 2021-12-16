@@ -4,8 +4,8 @@ import java.util.*;
 
 public class GrassField extends AbstractWorldMap{
     List<Grass> grassClamps=new ArrayList<>();
-    MapBoundary boundary=new MapBoundary();
-    GrassField(int n){
+    private MapBoundary boundary=new MapBoundary();
+    public GrassField(int n){
         super((int)Math.sqrt(n*10), (int)Math.sqrt(n*10));
         placeGrass(n);
     }
@@ -48,11 +48,6 @@ public class GrassField extends AbstractWorldMap{
         return null;
     }
 
-    /**
-     * przedefiniowane canMoveTo, width i height nie jest sprawdzane przy ruchu zwierząt
-     * @param position
-     * @return
-     */
     @Override
     public boolean canMoveTo(Vector2d position) {
         if(isOccupiedByAnimal(position))return false;
@@ -62,8 +57,23 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
         super.positionChanged(oldPosition, newPosition);
+
         for(int i=0; i<grassClamps.size(); i++){
-            if(newPosition.equals(grassClamps.get(i).getPosition()))grassClamps.remove(i);
+            if(newPosition.equals(grassClamps.get(i).getPosition())){
+                grassClamps.remove(i);
+                boolean done=false;
+                Random rand=new Random();
+                while(!done){
+                    Vector2d pos = new Vector2d(rand.nextInt(boundary.getMaxX()- boundary.getMinX())+ boundary.getMinX(),
+                            rand.nextInt(boundary.getMaxY()- boundary.getMinY())+ boundary.getMinY());
+                    if(!boundary.x.contains(pos)){
+                        done=true;
+                        Grass g=new Grass(pos);
+                        grassClamps.add(g);
+                        boundary.positionChanged(null, pos);
+                    }
+                }
+            }
         }
     }
 @Override
@@ -71,6 +81,10 @@ public class GrassField extends AbstractWorldMap{
         MapVisualizer visualizer=new MapVisualizer(this);
         if(boundary.x.size()<1)return "mapa jest pusta";
         int last=boundary.x.size()-1;
-        return visualizer.draw(new Vector2d(boundary.x.get(0).x,boundary.y.get(0).y), new Vector2d(boundary.x.get(last).x, boundary.x.get(last).y));
+        return visualizer.draw(new Vector2d(boundary.getMinX(),boundary.getMinY()), new Vector2d(boundary.getMaxX(), boundary.getMaxY()));
+    }
+
+    public MapBoundary getBoundary() {
+        return boundary;
     }
 }
