@@ -19,11 +19,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class App extends Application implements ISimulationObserver {
-    MyCanvas myCanvas;
-    Label statusBarLabel;
-    GrassField map=new GrassField(10);
-    SimulationEngine engine;
-    Thread animationThread;
+    private MyCanvas myCanvas;
+    private Label statusBarLabel;
+    private GrassField map=new GrassField(10);
+    private SimulationEngine engine;
+    private Thread animationThread;
 
     SimpleBooleanProperty simulationIsOn = new SimpleBooleanProperty(false);
 
