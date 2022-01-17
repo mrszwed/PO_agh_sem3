@@ -1,5 +1,5 @@
 package ge;
-
+// brakuje pakietu nadrzędnego + nieczytelna nazwa
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import simulation.ParallelSimulation;
 
-public class HelloApplication extends Application {
+public class HelloApplication extends Application { // nazwa klasy
 
     MapPane pane1;              //widok non wrappable map
     InformationPane infPane1;

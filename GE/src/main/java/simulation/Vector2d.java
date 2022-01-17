@@ -17,7 +17,7 @@ public class Vector2d {
         s.append(",");
         s.append(y);
         s.append(")");
-        return s.toString();
+        return s.toString();    // https://docs.oracle.com/javase/7/docs/api/java/lang/String.html#format(java.lang.String,%20java.lang.Object...)
     }
 
     Vector2d add(Vector2d other){

@@ -3,7 +3,7 @@ package simulation;
 import java.util.List;
 import java.util.Map;
 
-public interface MapObserver {
+public interface MapObserver {  // IMapObserver
     public static class Data{
         public int numberOfAnimals;
         public int numberOfGrass;

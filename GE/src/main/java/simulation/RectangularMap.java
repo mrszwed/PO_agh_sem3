@@ -86,7 +86,7 @@ public class RectangularMap {
         }
     }
 
-    void __crossCheckGrassAnimals(){
+    void __crossCheckGrassAnimals(){    // to nie Python; tu się pisze private
         for(var g:grassClumps.entrySet()){
             if(!g.getKey().equals(g.getValue().position))System.err.println("TRAWA blad"+g.getKey()+" "+g.getValue().position);
         }
@@ -122,7 +122,7 @@ public class RectangularMap {
 
     }
 
-    void crosoverringAll(){
+    void crosoverringAll(){ // raczej crossingOver
         List<Animal> newAnimals=new ArrayList<>();
         for(var l:animals.values()){
             if(l.size()<2)continue;
@@ -139,7 +139,7 @@ public class RectangularMap {
                 newAnimal.birthDate=globalTime;
             }
             else{
-                Random r=new Random();
+                Random r=new Random();  // potencjalnie nowy obiekt co obrót pętli
                 int a=r.nextInt(j);
                 int b=r.nextInt(j);
                 while(a==b)b=r.nextInt(j);
@@ -155,7 +155,7 @@ public class RectangularMap {
     
     
     void addGrassAll(){
-        Random r=new Random();
+        Random r=new Random();  // nowy obiekt co wywołanie
         int inJungle=(int)grassClumps.entrySet().stream().filter(e->jungleBoundary.contains(e.getKey())).count();
         if(inJungle<maxJungleGrass)addGrassToJungle(r);
         int inSavanna=grassClumps.size()-inJungle;
@@ -194,7 +194,7 @@ public class RectangularMap {
         grassClumps.put(g1.position, g1);
     }
 
-    void doMagic(){
+    void doMagic(){ // czy to na pewno jest zadanie dla mapy?
 
         if(!magic)return;
         if(magicsLeft==0)return;
@@ -324,7 +324,7 @@ public class RectangularMap {
         }
     }
 
-    List<Integer> dominantGenom(){
+    List<Integer> dominantGenom(){  // czy to na pewno jest zadanie dla mapy?
         Map<List<Integer>, Integer> genomToCnt=new HashMap<>();
         for(var e:animals.entrySet()){
             for(var a:e.getValue()){

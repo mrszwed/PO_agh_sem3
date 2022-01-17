@@ -4,7 +4,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Animal implements Cloneable {
-    public static double startEnergy=100;
+    // większość tych pól powinna być prywatna
+    public static double startEnergy=100;   // czemu 100?
     static double minEnergyToCrossover=50;
     static double lifeThreashold = 0;
     static double moveEnergy =5;
@@ -15,7 +16,7 @@ public class Animal implements Cloneable {
     public int lifeSpan=0;
     public int birthDate=0;
 
-    Animal parent1;
+    Animal parent1; // czy można zmienić rodzica w ciągu życia?
     Animal parent2;
     public int numberOfChildren=0;
     public int numberOfOffsprings=0;
@@ -23,9 +24,9 @@ public class Animal implements Cloneable {
     static Random r=new Random();
 
 
-    Animal(Vector2d position, int[] genotyp){
+    Animal(Vector2d position, int[] genotyp){   // DRY
         this.position=position;
-        this.genotyp=genotyp;   //kierunek losowy dac
+        this.genotyp=genotyp;   //kierunek losowy dac   // no właśnie + brak kontroli poprawności genotypu
         energy=startEnergy;
     }
 
@@ -124,7 +125,7 @@ public class Animal implements Cloneable {
         if(parent1!=null)parent1.incrementNumberOfOffsprings();
         if(parent2!=null)parent2.incrementNumberOfOffsprings();
     }
-    public String genotypToString(){
+    public String genotypToString(){    // polglish
         StringBuilder sb=new StringBuilder();
         sb.append("[");
         for(int i=0; i<32; i++){

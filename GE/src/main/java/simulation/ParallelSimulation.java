@@ -19,7 +19,7 @@ public class ParallelSimulation {
     boolean nwMagic=false;
 
 
-    public ParallelSimulation(){
+    public ParallelSimulation(){    // pusty konstruktor jest gratis
 
     }
 
